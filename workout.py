@@ -1,9 +1,10 @@
 '''
 TODO
-- Create workouts as lists of excercises
+- Create workouts as lists of excercises ✅
 - Read workouts from json ✅
+- Create excercises using json ✅
 - Track stats
-- Add sets to excercises
+- Add sets to excercises ✅
 - Noises
 - Daily notifications
 - Daily tracking
@@ -15,13 +16,17 @@ TODO
 '''
 
 import json
+import os
 import time as t
 
+ExcerciseClasses={}
+
 class Excercise:
-    def __init__(self,name,reps,time):
+    def __init__(self,name,reps,time,sets):
         self.name=name
         self.reps=reps
         self.time=time
+        self.sets=sets
 
     def display(self):
         if self.reps == 0:
@@ -30,7 +35,10 @@ class Excercise:
             t.sleep(self.time)
             print("Done!")
         elif self.time == 0:
-            print(str(self.reps)+" x "+str(self.name)+"s")
+            if self.sets!=1:
+                print(str(self.sets)+" sets of "+str(self.reps)+" "+str(self.name)+"s")
+            else:
+                print(str(self.reps)+" x "+str(self.name)+"s")
             input("Press any key to mark finished")
             print("Done!")
 
@@ -41,10 +49,15 @@ def displayWorkout(name):
     excercises=workoutdata["excercises"]
 
     for excercise in excercises:
-        globals()[excercise].display()
+        ExcerciseClasses[excercise+".json"].display()
 
+def loadExcercises():
+    for filepath in os.listdir("excercises"):
+        file=open("excercises/"+filepath,"r")
+        data=json.loads(file.read())
+        file.close()
+        ExcerciseClasses[filepath]=(Excercise(data["Name"],data["Reps"],data["Time"],data["Sets"]))
 
-ShortHang=Excercise("Hang",0,5)
-LowPullups=Excercise("Pullups",3,0)
+loadExcercises()
 displayWorkout("newworkout")
 quit()
