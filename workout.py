@@ -1,3 +1,19 @@
+'''
+TODO
+- Create workouts as lists of excercises
+- Read workouts from json
+- Track stats
+- Add sets to excercises
+- Noises
+- Daily notifications
+- Daily tracking
+- Max reps attempt excercise
+- Create workout tool
+- Create workout plan tool
+- Data analytics with graphs
+- Let you fail excercise
+'''
+
 import time as t
 
 class Excercise:
