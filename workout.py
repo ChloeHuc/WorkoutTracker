@@ -1,7 +1,7 @@
 '''
 TODO
 - Create workouts as lists of excercises
-- Read workouts from json
+- Read workouts from json ✅
 - Track stats
 - Add sets to excercises
 - Noises
@@ -14,6 +14,7 @@ TODO
 - Let you fail excercise
 '''
 
+import json
 import time as t
 
 class Excercise:
@@ -33,22 +34,17 @@ class Excercise:
             input("Press any key to mark finished")
             print("Done!")
 
+def displayWorkout(name):
+    file=open("workouts/"+name+".json", "r")
+    workoutdata=json.loads(file.read())
+    file.close()
+    excercises=workoutdata["excercises"]
 
-def displayExcercise(name,number,time):
-    if number == 0:
-        print(name + " for " + str(time) + " seconds")
-        input("Press any key to start")
-        t.sleep(time)
-        print("Done!")
-    elif time == 0:
-        print(str(number)+" x "+str(name)+"s")
-        input("Press any key to mark finished")
-        print("Done!")
+    for excercise in excercises:
+        globals()[excercise].display()
 
-#def startWorkout()
 
 ShortHang=Excercise("Hang",0,5)
 LowPullups=Excercise("Pullups",3,0)
-ShortHang.display()
-LowPullups.display()
+displayWorkout("newworkout")
 quit()
