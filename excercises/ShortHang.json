@@ -2,5 +2,6 @@
     "Name":"Hang",
     "Time":6,
     "Reps":0,
-    "Sets":0
+    "Sets":0,
+    "Max":"False"
 }

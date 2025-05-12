@@ -8,7 +8,7 @@ TODO
 - Noises
 - Daily notifications
 - Daily tracking
-- Max reps attempt excercise
+- Max reps attempt excercise ✅
 - Create workout tool
 - Create workout plan tool
 - Data analytics with graphs
@@ -22,13 +22,19 @@ import time as t
 ExcerciseClasses={}
 
 class Excercise:
-    def __init__(self,name,reps,time,sets):
+    def __init__(self,name,reps,time,sets,max):
         self.name=name
         self.reps=reps
         self.time=time
         self.sets=sets
+        self.max=max
 
     def display(self):
+        if self.max=="True":
+            print("Max reps of "+self.name)
+            reps=input("How many reps did you do? ")
+            print("Done!")
+            return
         if self.reps == 0:
             print(self.name + " for " + str(self.time) + " seconds")
             input("Press any key to start")
@@ -56,7 +62,7 @@ def loadExcercises():
         file=open("excercises/"+filepath,"r")
         data=json.loads(file.read())
         file.close()
-        ExcerciseClasses[filepath]=(Excercise(data["Name"],data["Reps"],data["Time"],data["Sets"]))
+        ExcerciseClasses[filepath]=(Excercise(data["Name"],data["Reps"],data["Time"],data["Sets"],data["Max"]))
 
 loadExcercises()
 displayWorkout("newworkout")

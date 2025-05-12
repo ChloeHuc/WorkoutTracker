@@ -2,5 +2,6 @@
     "Name":"Squat",
     "Time":0,
     "Reps":10,
-    "Sets":2
+    "Sets":2,
+    "Max":"False"
 }
